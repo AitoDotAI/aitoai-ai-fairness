@@ -98,9 +98,10 @@ attributes_and_values = OrderedDict({
     }
 })
 
-data_dir = Path(__file__).parent / 'data' # change this if needed
-df = pd.read_csv(data_dir / 'german.data', sep=' ', names=list(attributes_and_values.keys()))
-for col in df:
-    if attributes_and_values[col]:
-        df[col] = df[col].map(attributes_and_values[col], na_action='ignore')
-df.to_json(data_dir / 'german.ndjson', orient='records', lines=True)
+if __name__ == '__main__':
+    data_dir = Path(__file__).parent / 'data' # change this if needed
+    df = pd.read_csv(data_dir / 'german.data', sep=' ', names=list(attributes_and_values.keys()))
+    for col in df:
+        if attributes_and_values[col]:
+            df[col] = df[col].map(attributes_and_values[col], na_action='ignore')
+    df.to_json(data_dir / 'german_credit_rating.ndjson', orient='records', lines=True)
